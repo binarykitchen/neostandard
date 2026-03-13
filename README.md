@@ -11,7 +11,7 @@
 
 [![npm version](https://img.shields.io/npm/v/neostandard.svg?style=flat)](https://www.npmjs.com/package/neostandard)
 [![npm downloads](https://img.shields.io/npm/dm/neostandard.svg?style=flat)](https://www.npmjs.com/package/neostandard)
-[![neostandard javascript style](https://img.shields.io/badge/neo-standard-7fffff?style=flat\&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
+[![neostandard javascript style](https://img.shields.io/badge/neo-standard-7fffff?style=flat&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
 
 A spiritual successor to the [`standard`](https://github.com/standard/standard) javascript style guide
 
@@ -28,6 +28,7 @@ alt="platformatic"
 
 ## Table of Contents
 
+- [Mission](#mission)
 - [Quick Start](#quick-start)
   - [Migrate from `standard`](#migrate-from-standard)
   - [Add to new project](#add-to-new-project)
@@ -50,6 +51,12 @@ alt="platformatic"
 - [Governance](#governance)
 - [Used by](#used-by)
 
+## Mission
+
+Our _divine mission_ is to put behind the pain of configuring and maintaining eslint with all its plugins for you.
+
+With the spiritual path to coordinate a large amount of configuration, plugins and update churns in one place, consumers reach Nirvana sooner than when configuring raw eslint themselves, and can instead focus on writing code and improving the world with it.
+
 ## Quick Start
 
 ### Migrate from `standard`
@@ -60,9 +67,9 @@ alt="platformatic"
 4. Replace `standard` with `eslint` in all places where you run `standard`, eg. `"scripts"` and `.github/workflows/` (`neostandard` CLI tracked in [#2](https://github.com/neostandard/neostandard/issues/2))
 5. (Add ESLint editor integration, eg. [VS Code ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint))
 6. Cleanup:
-   * `npm uninstall standard`
-   * Remove unused `"standard"` top level key from your `package.json`
-   * Deactivate `standard` specific integrations if you no longer use them (eg. [vscode-standard](https://marketplace.visualstudio.com/items?itemName=standard.vscode-standard)))
+   - `npm uninstall standard`
+   - Remove unused `"standard"` top level key from your `package.json`
+   - Deactivate `standard` specific integrations if you no longer use them (eg. [vscode-standard](https://marketplace.visualstudio.com/items?itemName=standard.vscode-standard)))
 
 ### Add to new project
 
@@ -84,154 +91,159 @@ alt="platformatic"
    Or manually create the file as ESM:
 
    ```js
-   import neostandard from 'neostandard'
+   import neostandard from "neostandard";
 
    export default neostandard({
      // options
-   })
+   });
    ```
 
    Or as CommonJS:
 
    ```js
-   module.exports = require('neostandard')({
+   module.exports = require("neostandard")({
      // options
-   })
+   });
    ```
+
 3. Run `neostandard` by running ESLint, eg. using `npx eslint`, `npx eslint --fix` or similar
 
 ## Configuration options
 
 All examples below use **ESM (ECMAScript Modules)** syntax. If you're using **CommonJS (CJS)**, replace the `import`/`export` statements with the following:
 
-  ```js
-  // Replace
-  import neostandard from 'neostandard'
-  export default neostandard({ /* options */ })
+```js
+// Replace
+import neostandard from "neostandard";
+export default neostandard({
+  /* options */
+});
 
-  // With
-  const neostandard = require('neostandard')
-  module.exports = neostandard({ /* options */ })
-  ```
+// With
+const neostandard = require("neostandard");
+module.exports = neostandard({
+  /* options */
+});
+```
 
 Here's a basic example of how to configure `neostandard`:
 
-  ```js
-  import neostandard from 'neostandard'
+```js
+import neostandard from "neostandard";
 
-  export default neostandard({
-    ts: true,  // an option
-    // Add other options here
-  })
-  ```
+export default neostandard({
+  ts: true, // an option
+  // Add other options here
+});
+```
 
 The options below allow you to customize `neostandard` for your project. Use them to add global variables, ignore files, enable TypeScript support, and more.
 
-* `env` - *`string[]`* - adds additional globals by importing them from the [globals](https://www.npmjs.com/package/globals) npm module
-  
+- `env` - _`string[]`_ - adds additional globals by importing them from the [globals](https://www.npmjs.com/package/globals) npm module
+
   ```js
-  import neostandard from 'neostandard'
+  import neostandard from "neostandard";
 
   export default neostandard({
-    env: ['browser', 'mocha'],  // Add browser and mocha global variables
-  })
+    env: ["browser", "mocha"], // Add browser and mocha global variables
+  });
   ```
 
-* `files` - *`string[]`* - additional file patterns to match. Uses the same shape as ESLint [`files`](https://eslint.org/docs/latest/use/configure/configuration-files#specifying-files-and-ignores)
-  
+- `files` - _`string[]`_ - additional file patterns to match. Uses the same shape as ESLint [`files`](https://eslint.org/docs/latest/use/configure/configuration-files#specifying-files-and-ignores)
+
   ```js
-  import neostandard from 'neostandard'
+  import neostandard from "neostandard";
 
   export default neostandard({
-    files: ['src/**/*.js', 'tests/**/*.js'],  // Lint only files in src/ and tests/ directories
-  })
+    files: ["src/**/*.js", "tests/**/*.js"], // Lint only files in src/ and tests/ directories
+  });
   ```
 
-* `filesTs` - *`string[]`* - additional file patterns for the TypeScript configs to match. Uses the same shape as ESLint [`files`](https://eslint.org/docs/latest/use/configure/configuration-files#specifying-files-and-ignores)
-  
+- `filesTs` - _`string[]`_ - additional file patterns for the TypeScript configs to match. Uses the same shape as ESLint [`files`](https://eslint.org/docs/latest/use/configure/configuration-files#specifying-files-and-ignores)
+
   ```js
-  import neostandard from 'neostandard'
+  import neostandard from "neostandard";
 
   export default neostandard({
-    ts: true,   // Enable TypeScript support
-    filesTs: ['src/**/*.ts', 'tests/**/*.ts'],  // Lint only TypeScript files in src/ and tests/ directories
-  })
+    ts: true, // Enable TypeScript support
+    filesTs: ["src/**/*.ts", "tests/**/*.ts"], // Lint only TypeScript files in src/ and tests/ directories
+  });
   ```
-  
-* `globals` - *`string[] | object`* - an array of names of globals or an object of the same shape as ESLint [`languageOptions.globals`](https://eslint.org/docs/latest/use/configure/language-options#using-configuration-files)
-  
+
+- `globals` - _`string[] | object`_ - an array of names of globals or an object of the same shape as ESLint [`languageOptions.globals`](https://eslint.org/docs/latest/use/configure/language-options#using-configuration-files)
+
   Using an array:
 
   ```js
-  import neostandard from 'neostandard'
+  import neostandard from "neostandard";
 
   export default neostandard({
-    globals: ['$', 'jQuery'],  // Treat $ and jQuery as global variables
-  })
+    globals: ["$", "jQuery"], // Treat $ and jQuery as global variables
+  });
   ```
 
   Using an object:
 
   ```js
-  import neostandard from 'neostandard'
+  import neostandard from "neostandard";
 
   export default neostandard({
     globals: {
-      $: 'readonly',  // $ is a read-only global
-      jQuery: 'writable',  // jQuery can be modified
-      localStorage: 'off',  // Disable the localStorage global
+      $: "readonly", // $ is a read-only global
+      jQuery: "writable", // jQuery can be modified
+      localStorage: "off", // Disable the localStorage global
     },
-  })
+  });
   ```
 
-* `ignores` - *`string[]`* - an array of glob patterns for files that the config should not apply to, see [ESLint documentation](https://eslint.org/docs/latest/use/configure/ignore) for details
-  
+- `ignores` - _`string[]`_ - an array of glob patterns for files that the config should not apply to, see [ESLint documentation](https://eslint.org/docs/latest/use/configure/ignore) for details
+
   ```js
-  import neostandard from 'neostandard'
+  import neostandard from "neostandard";
 
   export default neostandard({
-    ignores: ['dist/**/*', 'tests/**'],  // Ignore files in dist/ and tests/ directories
-  })
+    ignores: ["dist/**/*", "tests/**"], // Ignore files in dist/ and tests/ directories
+  });
   ```
 
-* `noJsx` - *`boolean`* - if set, no jsx rules will be added. Useful if for some reason its clashing with your use of JSX-style syntax
-  
+- `noJsx` - _`boolean`_ - if set, no jsx rules will be added. Useful if for some reason its clashing with your use of JSX-style syntax
+
   ```js
-  import neostandard from 'neostandard'
+  import neostandard from "neostandard";
 
   export default neostandard({
-    noJsx: true,  // Disable JSX-specific rules
-  })
+    noJsx: true, // Disable JSX-specific rules
+  });
   ```
 
-* `noStyle` - *`boolean`* - if set, no style rules will be added. Especially useful when combined with [Prettier](https://prettier.io/), [dprint](https://dprint.dev/) or similar
-  
+- `noStyle` - _`boolean`_ - if set, no style rules will be added. Especially useful when combined with [Prettier](https://prettier.io/), [dprint](https://dprint.dev/) or similar
+
   ```js
-  import neostandard from 'neostandard'
+  import neostandard from "neostandard";
 
   export default neostandard({
-    noStyle: true,  // Disable style-related rules (useful with Prettier or dprint)
-  })
+    noStyle: true, // Disable style-related rules (useful with Prettier or dprint)
+  });
   ```
 
-* `semi` - *`boolean`* - if set, enforce rather than forbid semicolons (same as `semistandard` did)
-  
+- `semi` - _`boolean`_ - if set, enforce rather than forbid semicolons (same as `semistandard` did)
+
   ```js
-  import neostandard from 'neostandard'
+  import neostandard from "neostandard";
 
   export default neostandard({
-    semi: true,  // Enforce semicolons (like semistandard)
-  })
+    semi: true, // Enforce semicolons (like semistandard)
+  });
   ```
-  
-* `ts` - *`boolean`* - if set, TypeScript syntax will be supported and `*.ts` (including `*.d.ts`) will be checked. To add additional file patterns to the TypeScript checks, use `filesTs`
-  
+
+- `ts` - _`boolean`_ - if set, TypeScript syntax will be supported and `*.ts` (including `*.d.ts`) will be checked. To add additional file patterns to the TypeScript checks, use `filesTs`
+
   ```js
-  import neostandard from 'neostandard'
+  import neostandard from "neostandard";
 
   export default neostandard({
-    ts: true,  // Enable TypeScript support and lint .ts files
-  })
+    ts: true, // Enable TypeScript support and lint .ts files
+  });
   ```
 
 ## Extending
@@ -239,13 +251,13 @@ The options below allow you to customize `neostandard` for your project. Use the
 The `neostandard()` function returns an ESLint config array which is intended to be exported directly or, if you want to modify or extend the config, can be [combined with other configs](https://eslint.org/docs/latest/use/configure/combine-configs) like any other ESLint config array:
 
 ```js
-import neostandard from 'neostandard'
-import jsdoc from 'eslint-plugin-jsdoc';
+import neostandard from "neostandard";
+import jsdoc from "eslint-plugin-jsdoc";
 
 export default [
   ...neostandard(),
-  jsdoc.configs['flat/recommended-typescript-flavor'],
-]
+  jsdoc.configs["flat/recommended-typescript-flavor"],
+];
 ```
 
 Do note that `neostandard()` is intended to be a complete linting config in itself, only extend it if you have needs that goes beyond what `neostandard` provides, and [open an issue](https://github.com/neostandard/neostandard/issues) if you believe `neostandard` itself should be extended or changed in that direction.
@@ -259,57 +271,63 @@ As of neostandard v0.13.0, `eslint-plugin-import-x` has been removed to reduce d
 If you still need ESLint-based import checking, you can add it back manually:
 
 ```js
-import neostandard from 'neostandard'
-import importX from 'eslint-plugin-import-x'
+import neostandard from "neostandard";
+import importX from "eslint-plugin-import-x";
 
 export default [
   ...neostandard(),
   {
     plugins: {
-      'import-x': importX
+      "import-x": importX,
     },
     rules: {
-      'import-x/export': 'error',
-      'import-x/first': 'error',
-      'import-x/no-absolute-path': ['error', { esmodule: true, commonjs: true, amd: false }],
-      'import-x/no-duplicates': 'error',
-      'import-x/no-named-default': 'error',
-      'import-x/no-webpack-loader-syntax': 'error',
-    }
-  }
-]
+      "import-x/export": "error",
+      "import-x/first": "error",
+      "import-x/no-absolute-path": [
+        "error",
+        { esmodule: true, commonjs: true, amd: false },
+      ],
+      "import-x/no-duplicates": "error",
+      "import-x/no-named-default": "error",
+      "import-x/no-webpack-loader-syntax": "error",
+    },
+  },
+];
 ```
 
 For TypeScript projects, you may also want to add the TypeScript resolver:
 
 ```js
-import neostandard from 'neostandard'
-import importX from 'eslint-plugin-import-x'
-import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
+import neostandard from "neostandard";
+import importX from "eslint-plugin-import-x";
+import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 
 export default [
   ...neostandard(),
   {
     plugins: {
-      'import-x': importX
+      "import-x": importX,
     },
     settings: {
-      'import-x/resolver-next': [
+      "import-x/resolver-next": [
         createTypeScriptImportResolver({
-          project: './tsconfig.json'
-        })
-      ]
+          project: "./tsconfig.json",
+        }),
+      ],
     },
     rules: {
-      'import-x/export': 'error',
-      'import-x/first': 'error',
-      'import-x/no-absolute-path': ['error', { esmodule: true, commonjs: true, amd: false }],
-      'import-x/no-duplicates': 'error',
-      'import-x/no-named-default': 'error',
-      'import-x/no-webpack-loader-syntax': 'error',
-    }
-  }
-]
+      "import-x/export": "error",
+      "import-x/first": "error",
+      "import-x/no-absolute-path": [
+        "error",
+        { esmodule: true, commonjs: true, amd: false },
+      ],
+      "import-x/no-duplicates": "error",
+      "import-x/no-named-default": "error",
+      "import-x/no-webpack-loader-syntax": "error",
+    },
+  },
+];
 ```
 
 **Recommended alternative:** Use TypeScript's compiler for import checking instead:
@@ -329,19 +347,19 @@ Finds a `.gitignore` file that resides in the same directory as the ESLint confi
 ESM:
 
 ```js
-import neostandard, { resolveIgnoresFromGitignore } from 'neostandard'
+import neostandard, { resolveIgnoresFromGitignore } from "neostandard";
 
 export default neostandard({
   ignores: resolveIgnoresFromGitignore(),
-})
+});
 ```
 
 CommonJS:
 
 ```js
-module.exports = require('neostandard')({
-  ignores: require('neostandard').resolveIgnoresFromGitignore(),
-})
+module.exports = require("neostandard")({
+  ignores: require("neostandard").resolveIgnoresFromGitignore(),
+});
 ```
 
 ### Exported plugins
@@ -350,49 +368,46 @@ module.exports = require('neostandard')({
 
 #### List of exported plugins
 
-* `@stylistic` - export of [`@stylistic/eslint-plugin`](https://npmjs.com/package/@stylistic/eslint-plugin)
-* `n` - export of [`eslint-plugin-n`](https://npmjs.com/package/eslint-plugin-n)
-* `promise` - export of [`eslint-plugin-promise`](https://npmjs.com/package/eslint-plugin-promise)
-* `react` - export of [`eslint-plugin-react`](https://npmjs.com/package/eslint-plugin-react)
-* `typescript-eslint` - export of [`typescript-eslint`](https://npmjs.com/package/typescript-eslint)
+- `@stylistic` - export of [`@stylistic/eslint-plugin`](https://npmjs.com/package/@stylistic/eslint-plugin)
+- `n` - export of [`eslint-plugin-n`](https://npmjs.com/package/eslint-plugin-n)
+- `promise` - export of [`eslint-plugin-promise`](https://npmjs.com/package/eslint-plugin-promise)
+- `react` - export of [`eslint-plugin-react`](https://npmjs.com/package/eslint-plugin-react)
+- `typescript-eslint` - export of [`typescript-eslint`](https://npmjs.com/package/typescript-eslint)
 
 #### Usage of exported plugin
 
 If one eg. wants to add the `eslint-plugin-n` recommended config, then one can do:
 
 ```js
-import neostandard, { plugins } from 'neostandard'
+import neostandard, { plugins } from "neostandard";
 
-export default [
-  ...neostandard(),
-  plugins.n.configs['flat/recommended'],
-]
+export default [...neostandard(), plugins.n.configs["flat/recommended"]];
 ```
 
 ## Missing for 1.0.0 release
 
-* Investigate a dedicated `neostandard` runner: [#33](https://github.com/neostandard/neostandard/issues/33) / [#2](https://github.com/neostandard/neostandard/issues/2)
+- Investigate a dedicated `neostandard` runner: [#33](https://github.com/neostandard/neostandard/issues/33) / [#2](https://github.com/neostandard/neostandard/issues/2)
 
 Full list in [1.0.0 milestone](https://github.com/neostandard/neostandard/milestone/1)
 
 ## Differences to standard / eslint-config-standard 17.x
 
-* [Open governance](./GOVERNANCE.md), resolving [governance issue](https://github.com/standard/standard/issues/1948#issuecomment-2138078249)
-* Built for [ESLint 9](https://eslint.org/blog/2024/04/eslint-v9.0.0-released/)
-* Relies on [ESLint flat config](https://eslint.org/blog/2023/10/flat-config-rollout-plans/) to bundle plugins rather than custom [`standard-engine`](https://github.com/standard/standard-engine)
-* Replaces [deprecated ESLint style rules](https://eslint.org/blog/2023/10/deprecating-formatting-rules/) with [`eslint-stylistic`](https://eslint.style/) rules
-* Defaults to the `standard` behaviour of bundling JSX-support (ported from [`eslint-config-standard-jsx`](https://github.com/standard/eslint-config-standard-jsx)) with a `noJsx` option that deactivates it to match `eslint-config-standard`
-* Built in options replaces need for separate modules
-  * `ts` option makes `*.ts` files be checked as well (used to be handled by [`ts-standard`](https://github.com/standard/ts-standard))
-  * `semi` option enforces rather than ban semicolons (used to be handled by [`semistandard`](https://github.com/standard/semistandard))
-  * `noStyle` option deactivates style rules (used to require something like [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier))
+- [Open governance](./GOVERNANCE.md), resolving [governance issue](https://github.com/standard/standard/issues/1948#issuecomment-2138078249)
+- Built for [ESLint 9](https://eslint.org/blog/2024/04/eslint-v9.0.0-released/)
+- Relies on [ESLint flat config](https://eslint.org/blog/2023/10/flat-config-rollout-plans/) to bundle plugins rather than custom [`standard-engine`](https://github.com/standard/standard-engine)
+- Replaces [deprecated ESLint style rules](https://eslint.org/blog/2023/10/deprecating-formatting-rules/) with [`eslint-stylistic`](https://eslint.style/) rules
+- Defaults to the `standard` behaviour of bundling JSX-support (ported from [`eslint-config-standard-jsx`](https://github.com/standard/eslint-config-standard-jsx)) with a `noJsx` option that deactivates it to match `eslint-config-standard`
+- Built in options replaces need for separate modules
+  - `ts` option makes `*.ts` files be checked as well (used to be handled by [`ts-standard`](https://github.com/standard/ts-standard))
+  - `semi` option enforces rather than ban semicolons (used to be handled by [`semistandard`](https://github.com/standard/semistandard))
+  - `noStyle` option deactivates style rules (used to require something like [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier))
 
 ### Relaxed rules
 
-* [`@stylistic/comma-dangle`](https://eslint.org/docs/rules/comma-dangle) – *changed* – set to ignore dangling commas in arrays, objects, imports, exports and is it set to `warn` rather than `error`
-* [`@stylistic/no-multi-spaces`](https://eslint.org/docs/rules/no-multi-spaces) – *changed* – sets `ignoreEOLComments` to `true`, useful for aligning comments across multiple line
-* [`dot-notation`](https://eslint.org/docs/rules/dot-notation) – *deactivated* – clashes with the [`noPropertyAccessFromIndexSignature`](https://www.typescriptlang.org/tsconfig#noPropertyAccessFromIndexSignature) check in TypeScript
-* [`n/no-deprecated-api`](https://github.com/eslint-community/eslint-plugin-n/blob/master/docs/rules/no-deprecated-api.md) – *changed* – changed to `warn` instead of `error` as they are not urgent to fix
+- [`@stylistic/comma-dangle`](https://eslint.org/docs/rules/comma-dangle) – _changed_ – set to ignore dangling commas in arrays, objects, imports, exports and is it set to `warn` rather than `error`
+- [`@stylistic/no-multi-spaces`](https://eslint.org/docs/rules/no-multi-spaces) – _changed_ – sets `ignoreEOLComments` to `true`, useful for aligning comments across multiple line
+- [`dot-notation`](https://eslint.org/docs/rules/dot-notation) – _deactivated_ – clashes with the [`noPropertyAccessFromIndexSignature`](https://www.typescriptlang.org/tsconfig#noPropertyAccessFromIndexSignature) check in TypeScript
+- [`n/no-deprecated-api`](https://github.com/eslint-community/eslint-plugin-n/blob/master/docs/rules/no-deprecated-api.md) – _changed_ – changed to `warn` instead of `error` as they are not urgent to fix
 
 ## Config helper
 
@@ -427,13 +442,13 @@ neostandard --semi --migrate > eslint.config.js
 Yes! If you use `neostandard` in your project, you can include one of these badges in
 your readme to let people know that your code is using the neostandard style.
 
-[![neostandard javascript style](https://img.shields.io/badge/neo-standard-7fffff?style=flat\&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
+[![neostandard javascript style](https://img.shields.io/badge/neo-standard-7fffff?style=flat&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
 
 ```md
 [![neostandard javascript style](https://img.shields.io/badge/neo-standard-7fffff?style=flat&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
 ```
 
-[![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-7fffff?style=flat\&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
+[![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-7fffff?style=flat&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
 
 ```md
 [![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-7fffff?style=flat&labelColor=ff80ff)](https://github.com/neostandard/neostandard)
@@ -469,8 +484,8 @@ See [GOVERNANCE.md](./GOVERNANCE.md) for specifics.
 
 A subset of some of the projects that rely on `neostandard`:
 
-* [`bcomnes/npm-run-all2`](https://github.com/bcomnes/npm-run-all2) (https://github.com/bcomnes/npm-run-all2/pull/142)
-* [`fastify/fastify`](https://github.com/fastify/fastify) (https://github.com/fastify/fastify/pull/5509)
-* [`nodejs/undici`](https://github.com/nodejs/undici) (https://github.com/nodejs/undici/pull/3485)
-* [`poolifier/poolifier`](https://github.com/poolifier/poolifier)
-* [`uuidjs/uuid`](https://github.com/uuidjs/uuid) (https://github.com/uuidjs/uuid/pull/752)
+- [`bcomnes/npm-run-all2`](https://github.com/bcomnes/npm-run-all2) (https://github.com/bcomnes/npm-run-all2/pull/142)
+- [`fastify/fastify`](https://github.com/fastify/fastify) (https://github.com/fastify/fastify/pull/5509)
+- [`nodejs/undici`](https://github.com/nodejs/undici) (https://github.com/nodejs/undici/pull/3485)
+- [`poolifier/poolifier`](https://github.com/poolifier/poolifier)
+- [`uuidjs/uuid`](https://github.com/uuidjs/uuid) (https://github.com/uuidjs/uuid/pull/752)
